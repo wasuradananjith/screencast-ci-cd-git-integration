@@ -21,18 +21,18 @@ pipeline {
             steps {
                 sh """#!/bin/bash
                 ENVCOUNT=\$(apictl list envs --format {{.}} | wc -l)
-                if [ "\$ENVCOUNT" == "0" ]; then
-                    apictl add-env -e dev --apim https://localhost:9443
+                if [ "\$ENVCOUNT" == "1" ]; then
+                    apictl add-env -e prod --apim https://localhost:9444
                 fi
                 """
             }
         }
 
-        stage('Deploy APIs To "Dev" Environment') {
+        stage('Deploy APIs To "Production" Environment') {
             steps {
                 sh """
-                apictl login dev -u devops -p devops
-                apictl vcs deploy -e dev
+                apictl login prod -u devops -p devops
+                apictl vcs deploy -e prod
                 """
             }
         }
