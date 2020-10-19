@@ -150,7 +150,7 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/Pet'
-      name: test
+      - name: test
         in: query
         required: true
         type: integer
